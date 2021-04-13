@@ -1,11 +1,11 @@
-package dog.snow.androidrecruittest.repository.model
+package dog.snow.androidrecruittest.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class RawAlbum(
     val id: Int,
-    val userId: Int,
+    val userId: Long,
     val title: String
 ) : Parcelable

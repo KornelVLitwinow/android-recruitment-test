@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activity.SplashActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_items"
@@ -13,7 +13,7 @@
         android:clipToPadding="false"
         android:paddingTop="@dimen/search_size"
         android:scrollbars="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,9 +23,12 @@
         tools:listitem="@layout/list_item"
         tools:visibility="visible" />
 
-    <include layout="@layout/layout_search" />
+    <include
+        android:id="@+id/layout_search"
+        layout="@layout/layout_search" />
 
     <include
+        android:id="@+id/layout_empty_view"
         layout="@layout/layout_empty_view"
         tools:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,18 +2,21 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    >
+    tools:context=".ui.activity.HomeActivity">
 
-    <include layout="@layout/layout_appbar" />
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/layout_appbar" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container"
-        android:name="dog.snow.androidrecruittest.ui.ListFragment"
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:defaultNavHost="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:navGraph="@navigation/nav_graph" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

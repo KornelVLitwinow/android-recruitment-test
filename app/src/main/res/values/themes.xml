@@ -5,6 +5,9 @@
 
     <style name="AppTheme" parent="Base.AppTheme" />
 
-    <style name="AppTheme.SplashTheme" />
+    <style name="AppTheme.SplashTheme">
+        <item name="android:colorPrimaryDark">@color/splash_bg</item>
+        <item name="android:statusBarColor">@color/splash_bg</item>
+    </style>
 
 </resources>

@@ -8,7 +8,7 @@
     android:padding="@dimen/margin_normal">
 
     <ImageView
-        android:id="@+id/iv_thumb"
+        android:id="@+id/img_thumb"
         android:layout_width="@dimen/thumb_size"
         android:layout_height="@dimen/thumb_size"
         android:contentDescription="@null"
@@ -18,22 +18,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_photo_title"
+        android:id="@+id/txt_photo_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_normal"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintStart_toEndOf="@+id/iv_thumb"
-        app:layout_constraintTop_toTopOf="@+id/iv_thumb"
+        app:layout_constraintStart_toEndOf="@+id/img_thumb"
+        app:layout_constraintTop_toTopOf="@+id/img_thumb"
         tools:text="Name" />
 
     <TextView
-        android:id="@+id/tv_album_title"
+        android:id="@+id/txt_album_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintStart_toStartOf="@+id/tv_photo_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_photo_title"
+        app:layout_constraintStart_toStartOf="@+id/txt_photo_title"
+        app:layout_constraintTop_toBottomOf="@+id/txt_photo_title"
         tools:text="Description" />
 </androidx.constraintlayout.widget.ConstraintLayout>
