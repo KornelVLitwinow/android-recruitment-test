@@ -7,14 +7,16 @@
 
     <fragment
         android:id="@+id/list_fragment"
-        android:name="dog.snow.androidrecruittest.ui.fragment.ListFragment"
-        >
+        android:name="dog.snow.androidrecruittest.ui.fragment.ListFragment">
         <action
             android:id="@+id/action_list_to_details"
-            app:destination="@id/details_fragment"/>
+            app:destination="@id/details_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/details_fragment"
-        android:name="dog.snow.androidrecruittest.ui.fragment.DetailsFragment"
-        />
+        android:name="dog.snow.androidrecruittest.ui.fragment.DetailsFragment" />
 </navigation>

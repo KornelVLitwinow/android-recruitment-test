@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dog.snow.androidrecruittest.basic.Const
-import dog.snow.androidrecruittest.model.ListItem
 import dog.snow.androidrecruittest.databinding.DetailsFragmentBinding
 import dog.snow.androidrecruittest.extension.loadUrl
+import dog.snow.androidrecruittest.model.ListItem
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
