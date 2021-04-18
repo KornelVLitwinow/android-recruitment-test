@@ -28,7 +28,6 @@
         layout="@layout/layout_search" />
 
     <include
-        android:id="@+id/layout_empty_view"
-        layout="@layout/layout_empty_view"
-        tools:visibility="gone" />
+        android:id="@+id/layout_lottie_empty_view"
+        layout="@layout/layout_lottie_empty_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

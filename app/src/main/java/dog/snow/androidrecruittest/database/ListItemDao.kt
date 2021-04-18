@@ -15,6 +15,6 @@ interface ListItemDao {
     @Query("SELECT * FROM ListItemEntity")
     fun getAll(): Flow<List<ListItemEntity>>
 
-    @Query("SELECT * FROM ListItemEntity WHERE albumTitle LIKE '%' || :text || '%' OR title LIKE '%' || :text || '%' ")
+    @Query("SELECT * FROM ListItemEntity WHERE album_title LIKE '%' || :text || '%' OR title LIKE '%' || :text || '%' ")
     fun searchListItemByPhrase(text: String): Flow<List<ListItemEntity>>
 }

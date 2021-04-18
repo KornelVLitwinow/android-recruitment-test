@@ -11,6 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import dog.snow.androidrecruittest.api.AlbumService
 import dog.snow.androidrecruittest.api.PhotoService
 import dog.snow.androidrecruittest.api.UserService
+import dog.snow.androidrecruittest.basic.Const.Companion.BASE_URL
 import dog.snow.androidrecruittest.database.AppDatabase
 import dog.snow.androidrecruittest.database.ListItemDao
 import okhttp3.OkHttpClient
@@ -23,15 +24,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class AppModule {
-    private val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson): Retrofit {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
         val client = OkHttpClient.Builder()
-        client.addInterceptor(loggingInterceptor)
+        client.addInterceptor(loggingInterceptor).addNetworkInterceptor { chain ->
+            chain.proceed(chain.request().newBuilder().header("User-Agent", "SnowDog").build())
+        }
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client.build())

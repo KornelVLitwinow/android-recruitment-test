@@ -12,7 +12,7 @@ class ListItemViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    fun getDB()= listItemDbRepository.getAllListItemDatabase().asLiveData()
+    fun getListItemsDB()= listItemDbRepository.getAllListItemDatabase().asLiveData()
 
     fun searchListItemByPhrase(query: String) = listItemDbRepository.searchListItemByPhrase(query).asLiveData()
 }

@@ -19,20 +19,18 @@ class ListItemApiRepository @Inject constructor(
     suspend fun getDataFromApi() = createListItem(getPhotos(), getAlbums(), getUsers())
 
     private suspend fun getUniqueAlbumsIds() =
-        getPhotos()?.map { it.albumId }?.distinct()?.toList()
+        getPhotos()?.map { it.albumId }?.distinct()
 
     private suspend fun getAlbums(): List<RawAlbum?>? =
         getUniqueAlbumsIds()
             ?.map { albumId -> getAlbum(albumId.toLong()).body() }
-            ?.toList()
 
     private suspend fun getUsers(): List<RawUser?>? =
         getUniqueUsersIds()
             ?.map { userId -> getUser(userId ?: 0).body() }
-            ?.toList()
 
     private suspend fun getUniqueUsersIds(): List<Long?>? =
-        getAlbums()?.map { it?.userId }?.distinct()?.toList()
+        getAlbums()?.map { it?.userId }?.distinct()
 
     private fun createListItem(
         photos: ArrayList<RawPhoto>?,

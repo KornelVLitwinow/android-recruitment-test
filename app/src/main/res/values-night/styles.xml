@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.AppTheme.AppBar" parent="@style/Widget.Design.AppBarLayout" />
-
     <style name="SplashIconStyle">
-        <item name="srcCompat">@drawable/ic_logo_sd_symbol</item>
+        <item name="srcCompat">@drawable/ic_logo_sd_symbol_dark</item>
     </style>
 
     <style name="SplashTextStyle">
-        <item name="srcCompat">@drawable/ic_logo_sd_text</item>
+        <item name="srcCompat">@drawable/ic_logo_sd_text_dark</item>
     </style>
 
     <style name="ToolbarStyle">

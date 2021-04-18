@@ -9,5 +9,7 @@
 
     <include layout="@layout/layout_toolbar" />
 
-    <include layout="@layout/layout_banner" />
+    <include
+        android:id="@+id/banner_offline_mode"
+        layout="@layout/layout_banner" />
 </com.google.android.material.appbar.AppBarLayout>

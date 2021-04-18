@@ -1,5 +1,7 @@
 package dog.snow.androidrecruittest.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +9,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.databinding.SplashActivityBinding
+import dog.snow.androidrecruittest.extension.transitionCompleted
 import dog.snow.androidrecruittest.viewmodel.SplashViewModel
 import dog.snow.androidrecruittest.viewmodel.SplashViewModel.ViewStatus.*
 
@@ -31,21 +34,21 @@ class SplashActivity : AppCompatActivity() {
             when (it) {
                 Success -> openHomeActivitySuccess()
                 Error -> openHomeActivityError()
-                Loading -> showLoading()
+                NetworkErrorConnection -> showError()
             }
         }
     }
 
-    private fun showLoading() {
-
-    }
-
     private fun openHomeActivitySuccess() {
-        finish()
-        startActivity(HomeActivity.openActivity(this))
+        binding.viewMotion.transitionToStart()
+        binding.viewMotion.transitionCompleted {
+            finish()
+            startActivity(HomeActivity.openActivity(this@SplashActivity))
+        }
     }
 
     private fun openHomeActivityError() {
+        binding.viewMotion.transitionToStart()
         finish()
         startActivity(HomeActivity.openActivity(this))
     }
@@ -55,14 +58,18 @@ class SplashActivity : AppCompatActivity() {
         _binding = null
     }
 
-    private fun showError(errorMessage: String?) {
+    private fun showError() {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.cant_download_dialog_title)
-            .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
-            .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ -> /*tryAgain()*/ }
+            .setMessage(getString(R.string.cant_download_dialog_message))
+            .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ -> viewModel.loadData() }
             .setNegativeButton(R.string.cant_download_dialog_btn_negative) { _, _ -> finish() }
             .create()
             .apply { setCanceledOnTouchOutside(false) }
             .show()
+    }
+
+    companion object {
+        fun openActivity(context: Context) = Intent(context, SplashActivity::class.java)
     }
 }

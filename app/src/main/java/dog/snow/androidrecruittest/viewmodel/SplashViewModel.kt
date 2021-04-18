@@ -1,28 +1,41 @@
 package dog.snow.androidrecruittest.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dog.snow.androidrecruittest.repository.ListItemApiRepository
 import dog.snow.androidrecruittest.repository.ListItemDbRepository
+import dog.snow.androidrecruittest.repository.NetworkRepository
 import dog.snow.androidrecruittest.viewmodel.SplashViewModel.ViewStatus.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val listItemRepository: ListItemApiRepository,
-    private val listItemDbRepository: ListItemDbRepository
+    private val listItemDbRepository: ListItemDbRepository,
+    private val networkRepository: NetworkRepository
 ) :
     ViewModel() {
-    init {
-        loadData()
-    }
 
-    private val viewStateMutable = MutableLiveData<ViewStatus>(Loading)
+    private val viewStateMutable = MutableLiveData<ViewStatus>()
     val observeViewState: LiveData<ViewStatus> = viewStateMutable
 
-    private fun loadData() {
+    init {
+        if (isNetworkConnection()) {
+            loadData()
+        } else {
+            viewStateMutable.postValue(NetworkErrorConnection)
+        }
+    }
+
+    private fun isNetworkConnection() = networkRepository.isInternetAvailable()
+
+    fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val listFromApi = listItemRepository.getDataFromApi()
@@ -33,7 +46,11 @@ class SplashViewModel @Inject constructor(
                     viewStateMutable.postValue(Error)
                 }
             } catch (e: Exception) {
-                viewStateMutable.postValue(Error)
+                if (e is SocketTimeoutException) {
+                    loadData()
+                } else {
+                    viewStateMutable.postValue(Error)
+                }
             }
         }
 
@@ -42,7 +59,7 @@ class SplashViewModel @Inject constructor(
     sealed class ViewStatus {
         object Error : ViewStatus()
         object Success : ViewStatus()
-        object Loading : ViewStatus()
+        object NetworkErrorConnection : ViewStatus()
     }
 
 }
